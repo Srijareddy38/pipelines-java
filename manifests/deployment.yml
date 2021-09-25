@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "srijacluster-5d15"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "srijacluster-5d15"
+  template:
+    metadata:
+      labels:
+        app: "srijacluster-5d15"
+    spec:
+      containers:
+        - name: "srijacluster-5d15"
+          image: "srijafirst.azurecr.io/srijacluster"
+          ports:
+          - containerPort: 8080
