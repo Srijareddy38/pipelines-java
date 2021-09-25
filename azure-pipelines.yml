@@ -22,6 +22,6 @@ steps:
     goals: 'package'
 - task: Docker@2
   inputs:
-    repository: 'Srijafirst.azurecr.io'
+    repository: 'srijafirst.azurecr.io'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
