@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: srijafirst.azurecr.io
+        username: ${{ secrets.acr_srijafirst_username }}
+        password: ${{ secrets.acr_srijafirst_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t srijafirst.azurecr.io/srijacluster:${{ github.sha }} --label dockerfile-path=Dockerfile
+        docker push srijafirst.azurecr.io/srijacluster:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_srijacluster_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep srijacluster38 | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace srijacluster38`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: srijacluster38
+        container-registry-url: srijafirst.azurecr.io
+        container-registry-username: ${{ secrets.acr_srijafirst_username }}
+        container-registry-password: ${{ secrets.acr_srijafirst_password }}
+        secret-name: srijaclusterdockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: srijacluster38
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          srijafirst.azurecr.io/srijacluster:${{ github.sha }}
+        imagepullsecrets: |
+          srijaclusterdockerauth
