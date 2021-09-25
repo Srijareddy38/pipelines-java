@@ -26,3 +26,11 @@ steps:
     repository: 'srijafirst.azurecr.io'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'Srijakubecluster'
+    namespace: 'default'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
+    azureSubscriptionEndpointForSecrets: 'Azure subscription 1(461d8668-ea6f-482a-ac6d-a7fe3985d449)'
