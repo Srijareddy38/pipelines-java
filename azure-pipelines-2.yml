@@ -20,7 +20,6 @@ variables:
   imageRepository: 'ymlpractise'
   containerRegistry: 'Srijafirst'
   dockerfilePath: '**/Dockerfile'
-  tag: '$(Build.BuildId)'
   imagePullSecret: 'srijafirst17301e75-auth'
 
 pool:
