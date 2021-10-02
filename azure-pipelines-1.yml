@@ -14,7 +14,6 @@ variables:
   imageRepository: 'ymlpractise'
   containerRegistry: 'Srijafirst'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
 stages:
 - stage: Build
   displayName: Build and push stage
@@ -31,8 +30,6 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(containerRegistry)
-        tags: |
-          $(tag)
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml'
