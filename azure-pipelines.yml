@@ -7,25 +7,20 @@
 trigger:
 - master
 
-pool:
-  name: Ammu
-
 parameters:
-- name: image
+- name: Ammu
   displayName: Pool Image
   type: string
   default: Ammu
   values:
-  - windows-latest
-  - ubuntu-latest
-  - macOS-latest
+  - Ammu
 
 
 jobs:
 - job: build
   displayName: build
   pool: 
-    vmImage: ${{ parameters.image }}
+    vmImage: ${{ parameters.Ammu }}
   steps:
-  - script: echo building $(Build.BuildNumber) with ${{ parameters.image }}
+  - script: echo building $(Build.BuildNumber) with ${{ parameters.Ammu }}
 
