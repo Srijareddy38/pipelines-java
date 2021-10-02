@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ymlpractise1
-        image: srijafirst.azurecr.io/ymlpractise:86
+        image: srijafirst.azurecr.io/ymlpractise
         ports:
         - containerPort: 80
 apiVersion: v1
