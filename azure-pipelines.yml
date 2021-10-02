@@ -8,19 +8,21 @@ trigger:
 - master
 
 parameters:
-- name: Ammu
+- name: Image
   displayName: Pool Image
   type: string
   default: Ammu
   values:
   - Ammu
+  - Srija
+  - SaiSrija
 
 
 jobs:
 - job: build
   displayName: build
   pool: 
-    vmImage: ${{ parameters.Ammu }}
+    vmImage: ${{ parameters.Image }}
   steps:
-  - script: echo building $(Build.BuildNumber) with ${{ parameters.Ammu }}
+  - script: echo building $(Build.BuildNumber) with ${{ parameters.Image }}
 
