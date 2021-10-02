@@ -11,10 +11,8 @@ parameters:
   type: string
 
 variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '55a9f1ea-4a4a-4c91-bd4a-5fea2f466c65'
-  imageRepository: 'srijareddypipelinesjava'
-  containerRegistry: 'srijafirst.azurecr.io'
+  imageRepository: 'ymlpractise'
+  containerRegistry: 'Srijafirst'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 stages:
@@ -32,7 +30,7 @@ stages:
         command: buildAndPush
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(containerRegistry)
         tags: |
           $(tag)
         
