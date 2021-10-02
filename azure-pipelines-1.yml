@@ -18,7 +18,7 @@ parameters:
   displayName: Pool Image
   type: string
   values:
-  - Ammu
+  - ammuagent1
   - Srija
   - SaiSrija
 
