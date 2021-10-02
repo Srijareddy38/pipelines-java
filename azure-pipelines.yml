@@ -5,7 +5,7 @@
 
 
 trigger:
-- master
+- none
 
 parameters:
 - name: Image
@@ -15,6 +15,9 @@ parameters:
   - Ammu
   - Srija
   - SaiSrija
+- name: test
+  displayName: Run Tests?
+  type: boolean
 
 
 jobs:
@@ -24,4 +27,12 @@ jobs:
     vmImage: ${{ parameters.Image }}
   steps:
   - script: echo building $(Build.BuildNumber) with ${{ parameters.Image }}
+- job: build
+  displayName: Build and Test
+  pool: 
+    vmImage: ${{ parameters.image }}
+  steps:
+  - script: echo building $(Build.BuildNumber)
+  - ${{ if eq(parameters.test, true) }}:
+    - script: echo "Running all the tests"
 
