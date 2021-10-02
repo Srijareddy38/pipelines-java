@@ -8,13 +8,13 @@ trigger:
 - master
 
 pool:
-  name: default
+  name: Ammu
 
 parameters:
 - name: image
   displayName: Pool Image
   type: string
-  default: ubuntu-latest
+  default: Ammu
   values:
   - windows-latest
   - ubuntu-latest
