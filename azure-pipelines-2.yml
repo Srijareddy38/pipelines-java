@@ -9,6 +9,9 @@ resources:
  pipelines:
   - pipeline: YAMLpractisepipline2
     source: YAMLpractisepipline1
+    trigger:
+     branches:
+     - none
 
 variables:
 
