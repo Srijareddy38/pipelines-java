@@ -43,10 +43,13 @@ stages:
               namespace: 'srija'
               command: 'apply'
               useConfigurationFile: true
-              configuration: 'C:\Windows\System32\Ammuagent\ammuagent1\_work\1\s'
+              configuration: '$(Build.Repository.LocalPath)'
               secretType: 'dockerRegistry'
               containerRegistryType: 'Azure Container Registry'
               azureSubscriptionEndpointForSecrets: 'Azure subscription 1(461d8668-ea6f-482a-ac6d-a7fe3985d449)'
               azureContainerRegistry: 'srijafirst.azurecr.io'
               secretName: '$(imagePullSecret)'
+          - task: KubectlInstaller@0
+            inputs:
+                kubectlVersion: 'latest'
 
